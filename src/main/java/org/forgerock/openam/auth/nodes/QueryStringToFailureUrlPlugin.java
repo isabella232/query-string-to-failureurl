@@ -57,7 +57,7 @@ import org.forgerock.openam.plugins.PluginException;
  */
 public class QueryStringToFailureUrlPlugin extends AbstractNodeAmPlugin {
 
-	static private String currentVersion = "1.0.0";
+	static private String currentVersion = "6.5.2";
 	
     /** 
      * Specify the Map of list of node classes that the plugin is providing. These will then be installed and
@@ -105,6 +105,9 @@ public class QueryStringToFailureUrlPlugin extends AbstractNodeAmPlugin {
      */	
 	@Override
 	public void upgrade(String fromVersion) throws PluginException {
+		if (fromVersion.equals("1.0.0")) {
+			pluginTools.upgradeAuthNode(QueryStringToFailureUrl.class);
+		}
 		super.upgrade(fromVersion);
 	}
 
